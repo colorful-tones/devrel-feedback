@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "devrel/feedback",
+  "version": "0.1.0",
+  "title": "DevRel Feedback",
+  "category": "common",
+  "icon": "feedback",
+  "allowedBlocks": [
+    "core/paragraph",
+    "devrel/feedback-toggle",
+    "devrel/feedback-form"
+  ],
+  "attributes": {
+    "submissionMethod": {
+      "type": "string",
+      "default": "email"
+    },
+    "method": {
+      "type": "string",
+      "default": "post"
+    },
+    "action": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "feedback-emote": {
+      "type": "string",
+      "default": "loveIt"
+    }
+  },
+  "description": "Feedback block for posts.",
+  "example": {},
+  "textdomain": "devrel",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScriptModule": "file:./view.js",
+  "render": "file:./render.php",
+  "usesContext": [
+    "postId"
+  ],
+  "providesContext": {
+    "devrel/feedback-emote": "loveIt"
+  }
+}
