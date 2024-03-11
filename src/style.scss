@@ -6,8 +6,8 @@
  */
 
 .wp-block-devrel-feedback {
-	--devrel-feedback-svg-fill--hate-it: red;
-	--devrel-feedback-svg-fill--love-it: teal;
+	--devrel-feedback-svg-fill--hate-it: rgb(182, 231, 255);
+	--devrel-feedback-svg-fill--love-it: rgb(255, 195, 223);
 
 	background-color: transparent;
 	border: 1px solid var(--wp--preset--color--contrast);
@@ -17,6 +17,7 @@
 
 .single-post .wp-block-devrel-feedback {
 	max-width: fit-content;
+	overflow: hidden;
 }
 
 .devrel-feedback__trigger {
@@ -38,7 +39,21 @@
 	gap: 1px;
 }
 
-.devrel-feedback-form-wrapper {
+.devrel-feedback__form-wrapper {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows .2s;
+}
+
+.devrel-feedback__form-wrapper > * {
+	overflow: hidden;
+}
+
+.devrel-feedback__form-wrapper:where(.expanded, .processing, .success, .error) {
+	grid-template-rows: 1fr;
+}
+
+.devrel-feedback__form-inner {
 	padding-left: var(--wp--preset--spacing--10);
 	padding-right: var(--wp--preset--spacing--10);
 }
@@ -62,13 +77,21 @@
 	padding: var(--wp--preset--spacing--10);
 }
 
-:where(.devrel-feedback-emoji) {
+.wp-block-devrel-feedback :where(button) {
 	align-items: center;
 	background-color: initial;
-	border: none;
-	border-radius: 50%;
+	background-image: none;
+	border-color: var(--wp--preset--color--contrast);
+	border-radius: 999px;
+	border-width: 2px;
 	color: currentColor;
 	cursor: pointer;
+	font-family: inherit;
+	padding: 0.4rem 1.5rem;
+}
+
+.devrel-feedback-emoji {
+	border: none;
 	display: flex;
 	height: 2rem;
 	justify-content: center;
@@ -83,4 +106,23 @@
 :where(.devrel-feedback-emoji):focus {
 	outline-color: var(--wp--preset--color--contrast-3);
 	outline-width: 1px;
+}
+
+.devrel-feedback__response {
+	padding-bottom: 0.25rem;
+	padding-left: var(--wp--preset--spacing--10);
+	padding-right: var(--wp--preset--spacing--10);
+}
+
+.devrel-feedback__response-message {
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.success {
+	color: rgb(230, 255, 230);
+}
+
+.error {
+	color: rgb(255, 214, 214);
 }

@@ -15,14 +15,14 @@ if ( ! isset( $block->context['postId'] ) ) {
 }
 
 // Initialize the feedback form state on server.
-
 $_state = array(
 	'postId'            => $block->context['postId'],
 	'isFormHidden'      => true,
 	'isFormProcessing'  => false,
 	'currentlySelected' => '',
-	'isSuccess'         => false,
-	'isError'           => false,
+	'hasSuccess'        => false,
+	'hasError'          => false,
+	'formMessage'       => '',
 	'ajaxUrl'           => admin_url( 'admin-ajax.php' ),
 	'nonce'             => wp_create_nonce( 'devrel_feedback_nonce' ),
 );
@@ -60,8 +60,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 
 <div
 	<?php echo wp_kses_data( $wrapper_attributes ); ?>
-	data-wp-interactive='devrelFeedback'
-	data-wp-on--form-submit='callbacks.submitForm'
+	data-wp-interactive='{ "namespace": "devrel/feedback" }'
 	data-wp-on--processing-success='callbacks.processingSuccess'
 	data-wp-on--processing-error='callbacks.processingError'
 	<?php echo wp_interactivity_data_wp_context( $_state ); ?>
@@ -78,7 +77,7 @@ $wrapper_attributes = get_block_wrapper_attributes(
 					data-wp-on--click="actions.toggleForm"
 					data-wp-run--update-selected="actions.updateSelected"
 					data-wp-class--selected="context.isSelected"
-					aria-controls="devrel-feedback-form"
+					aria-controls="devrel-feedback-form-wrapper"
 					aria-label="Select <?php echo esc_html( $option['label'] ); ?> emoji"
 					class="devrel-feedback-emoji"
 					role="radio"
@@ -92,11 +91,27 @@ $wrapper_attributes = get_block_wrapper_attributes(
 	</div>
 
 	<div
-		id="devrel-feedback-form"
+		id="devrel-feedback-form-wrapper"
+		class="devrel-feedback__form-wrapper"
 		data-wp-bind--hidden="context.isFormHidden"
+		data-wp-class--expanded="!context.isFormHidden"
 	>
+
+		<div
+			class="devrel-feedback__response"
+			data-wp-bind--hidden="!context.isFormProcessing"
+			data-wp-class--processing="context.isFormProcessing"
+			data-wp-class--error="context.hasError"
+			data-wp-class--success="context.hasSuccess"
+		>
+			<p
+				class="devrel-feedback__response-message"
+				data-wp-text="context.formMessage"
+			></p>
+		</div>
+
 		<form id="feedback-form" data-wp-on--submit="actions.submitForm">
-			<div class="devrel-feedback-form-wrapper">
+			<div class="devrel-feedback__form-inner">
 				<textarea
 					class="devrel-feedback-textarea"
 					name="feedback"
@@ -117,13 +132,13 @@ $wrapper_attributes = get_block_wrapper_attributes(
 			</div>
 			
 			<div class="devrel-feedback-actions">
-				<button type="submit" class="devrel-feedback-submit-button">
-					<span><?php echo esc_html__( 'Send', 'devrel' ); ?></span>
+				<button
+					class="devrel-feedback-submit-button"
+					type="submit"
+				>
+					<?php echo esc_html__( 'Send', 'devrel' ); ?>
 				</button>
 			</div>
-
-			<div id="devrel-feedback-response-success" data-wp-bind--hidden="context.isFormProcessing"></div>
-			<div id="devrel-feedback-response-error" hidden></div>
 		</form>
 	</div>
 
