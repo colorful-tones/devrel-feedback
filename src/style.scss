@@ -59,17 +59,22 @@
 }
 
 :where(.devrel-feedback-textarea) {
-	background-color: var(--wp--preset--color--contrast);
+	background-color: rgba(255, 255, 255, 0.9);
 	border-radius: 0.33rem;
-	border: 1px solid var(--wp--preset--color--contrast-2);
+	border: 1px solid rgba(255, 255, 255, 0.2);
 	box-sizing: border-box;
 	display: block;
 	height: 100px;
 	padding: calc(.667em + 2px);
+	opacity: 0.6;
 	resize: none;
-	transition: border-color .2s;
+	transition: opacity .2s;
 	width: 100%;
 }
+
+:where(.devrel-feedback-textarea):focus {
+	opacity: 0.95;
+}	
 
 :where(.devrel-feedback-actions) {
 	display: flex;
@@ -87,7 +92,13 @@
 	color: currentColor;
 	cursor: pointer;
 	font-family: inherit;
+	outline: none;
 	padding: 0.4rem 1.5rem;
+}
+
+.devrel-feedback-submit-button:hover {
+	background-color: var(--wp--preset--color--contrast-2);
+	color: var(--wp--preset--color--base-2);
 }
 
 .devrel-feedback-emoji {

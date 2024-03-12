@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Devrel Feedback
  * Description:       A feedback form for DevRel
- * Version:           0.1.2
+ * Version:           0.1.3
  * Requires at least: 6.5
  * Requires PHP:      7.0
  * Author:            WP Engine DevRel (DAC)
@@ -47,7 +47,7 @@ function devrel_feedback_submission_handler() {
 	$feedback_emote = sanitize_text_field( $_POST['feedback_selected_emote'] );
 
 	$to      = get_option( 'admin_email' );
-	$subject = 'You\'ve received feedback on: ' . $post_title;
+	$subject = 'Feedback on: ' . $post_title;
 	$message = "Feedback: {$feedback_text}<br> The user's sentiment was: <em>{$feedback_emote}</em> for the post titled <b><a href={$post_url}>{$post_title}</a></b>";
 	$headers = array( 'Content-Type: text/html; charset=UTF-8' );
 

@@ -61,8 +61,6 @@ $wrapper_attributes = get_block_wrapper_attributes(
 <div
 	<?php echo wp_kses_data( $wrapper_attributes ); ?>
 	data-wp-interactive='{ "namespace": "devrel/feedback" }'
-	data-wp-on--processing-success='callbacks.processingSuccess'
-	data-wp-on--processing-error='callbacks.processingError'
 	<?php echo wp_interactivity_data_wp_context( $_state ); ?>
 >
 
