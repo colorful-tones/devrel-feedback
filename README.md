@@ -4,8 +4,7 @@ __Fork it, or download the [latest release](https://github.com/colorful-tones/de
 
 This is an example block that utilizes the upcoming public Interactivity API that will be a part of the WordPress 6.5 release (March 26, 2024). Check out [the original Make announcement for the full details](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-interactivity/).
 
-[![Video demo of Feedback block](docs/Feedback-block-demo.mp4)
-
+[![Video demo of Feedback block](https://github.com/colorful-tones/devrel-feedback/assets/405912/7bfadb7b-db25-4c32-b8ea-f43b411db3fc)
 
 ## Description
 
