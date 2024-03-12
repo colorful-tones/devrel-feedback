@@ -6,11 +6,6 @@
 	"title": "DevRel Feedback",
 	"category": "common",
 	"icon": "feedback",
-	"allowedBlocks": [
-		"core/paragraph",
-		"devrel/feedback-toggle",
-		"devrel/feedback-form"
-	],
 	"attributes": {
 		"submissionMethod": {
 			"type": "string",
